@@ -1,6 +1,8 @@
 package api
 
 import (
+	"fmt"
+	jwt "github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
 	"github.com/tbphp/go-edusys/internal/e"
 	"github.com/tbphp/go-edusys/internal/middleware"
@@ -18,6 +20,7 @@ func NewSchoolApi(db *gorm.DB) *SchoolApi {
 }
 
 func (t *SchoolApi) Index(c *gin.Context) {
+	fmt.Println(jwt.ExtractClaims(c))
 	var schools []model.School
 	tx := t.db.Order("id desc").Find(&schools)
 

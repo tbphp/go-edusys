@@ -24,6 +24,10 @@ var App struct {
 	Mode string `mapstructure:"mode"`
 }
 
+var Auth struct {
+	Key string `mapstructure:"key"`
+}
+
 var configFiles = []string{
 	"./config/app.ini",
 	"./config/pro.ini",

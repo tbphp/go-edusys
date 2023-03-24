@@ -1,12 +1,13 @@
 package database
 
 import (
-	"github.com/tbphp/go-edusys/internal/model"
 	"gorm.io/gorm"
 )
 
 var migrateModels = []any{
-	model.School{},
+	// model.School{},
+	// model.Teacher{},
+	// model.Student{},
 }
 
 func AutoMigrate(db *gorm.DB) {
