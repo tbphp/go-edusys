@@ -10,11 +10,10 @@ func IdentityMiddleware(ident int) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ui, ok := c.Get("auth")
 		if !ok {
-			return
+			panic(e.CodeError(e.Authorization))
 		}
 
-		uit := ui.(model.UserIdentity)
-		if uit.Identity != ident {
+		if ui.(model.UserIdentity).Identity != ident {
 			panic(e.CodeError(e.Authorization))
 		}
 
