@@ -11,11 +11,12 @@ func ErrorHandler() gin.RecoveryFunc {
 		result := NewResponse(e.Exception, e.GetMsg(e.Exception), map[string]any{})
 
 		switch v := err.(type) {
-		case *e.CError:
-			result.Code = v.Code()
-			result.Msg = v.Error()
 		case error:
 			result.Msg = v.Error()
+			break
+		case string:
+			result.Msg = v
+			break
 		}
 
 		c.AbortWithStatusJSON(http.StatusOK, result)
