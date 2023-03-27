@@ -1,7 +1,6 @@
 package database
 
 import (
-	"database/sql"
 	"fmt"
 	"github.com/tbphp/go-edusys/pkg/config"
 	"gorm.io/driver/postgres"
@@ -25,13 +24,4 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
-
-	AutoMigrate(DB)
-}
-
-func CloseDb() {
-	sqlDB, _ := DB.DB()
-	defer func(sqlDB *sql.DB) {
-		_ = sqlDB.Close()
-	}(sqlDB)
 }
