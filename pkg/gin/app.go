@@ -1,13 +1,14 @@
-package app
+package gin
 
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	log "github.com/sirupsen/logrus"
 	"github.com/tbphp/go-edusys/internal/e"
-	"github.com/tbphp/go-edusys/internal/middleware"
 	"github.com/tbphp/go-edusys/internal/router"
 	"github.com/tbphp/go-edusys/pkg/config"
 	"github.com/tbphp/go-edusys/pkg/response"
+	ginlogrus "github.com/toorop/gin-logrus"
 )
 
 var r *gin.Engine
@@ -29,9 +30,8 @@ func Run() {
 
 func loadMiddlewares() {
 	r.Use(
-		gin.Logger(),
-		gin.CustomRecovery(response.ErrorHandler()),
-		middleware.CErrorRecoverMiddleware(),
+		ginlogrus.Logger(log.StandardLogger()),
+		gin.CustomRecoveryWithWriter(nil, response.ErrorHandler()),
 	)
 }
 

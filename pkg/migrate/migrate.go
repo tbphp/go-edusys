@@ -1,8 +1,8 @@
 package migrate
 
 import (
+	"github.com/gin-gonic/gin"
 	"github.com/tbphp/go-edusys/internal/model"
-	"github.com/tbphp/go-edusys/pkg/config"
 	"github.com/tbphp/go-edusys/pkg/database"
 )
 
@@ -13,7 +13,7 @@ var migrateModels = []any{
 }
 
 func init() {
-	if config.App.Mode != "debug" {
+	if !gin.IsDebugging() {
 		return
 	}
 
