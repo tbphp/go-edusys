@@ -8,7 +8,6 @@ import (
 // @version 1.0
 // @description	教务管理系统接口文档
 // @BasePath /api
-// @securityDefinitions.basic BasicAuth
 func main() {
 	app.Run()
 }

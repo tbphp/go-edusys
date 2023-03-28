@@ -7,10 +7,5 @@
         "version": "1.0"
     },
     "basePath": "/api",
-    "paths": {},
-    "securityDefinitions": {
-        "BasicAuth": {
-            "type": "basic"
-        }
-    }
+    "paths": {}
 }
