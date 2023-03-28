@@ -21,6 +21,7 @@ func init() {
 	r = gin.New()
 	loadMiddlewares()
 	registerRouters()
+	InitSwagger()
 }
 
 func Run() {
