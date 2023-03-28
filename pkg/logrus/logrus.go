@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func init() {
+func ConfigLog() {
 	if gin.IsDebugging() {
 		log.SetLevel(log.DebugLevel)
 		log.SetFormatter(&log.TextFormatter{

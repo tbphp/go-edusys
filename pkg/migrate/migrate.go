@@ -12,7 +12,7 @@ var migrateModels = []any{
 	model.Student{},
 }
 
-func init() {
+func Migrate() {
 	if !gin.IsDebugging() {
 		return
 	}
