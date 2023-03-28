@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/tbphp/go-edusys/pkg/gin"
+	"github.com/tbphp/go-edusys/pkg/app"
 )
 
 func main() {
-	gin.Run()
+	app.Run()
 }

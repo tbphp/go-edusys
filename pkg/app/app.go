@@ -1,4 +1,4 @@
-package gin
+package app
 
 import (
 	"fmt"
@@ -7,8 +7,6 @@ import (
 	"github.com/tbphp/go-edusys/internal/e"
 	"github.com/tbphp/go-edusys/internal/router"
 	"github.com/tbphp/go-edusys/pkg/config"
-	"github.com/tbphp/go-edusys/pkg/logrus"
-	"github.com/tbphp/go-edusys/pkg/migrate"
 	"github.com/tbphp/go-edusys/pkg/response"
 	ginlogrus "github.com/toorop/gin-logrus"
 )
@@ -16,8 +14,8 @@ import (
 var r *gin.Engine
 
 func init() {
-	logrus.ConfigLog()
-	migrate.Migrate()
+	InitLog()
+	Migrate()
 
 	gin.SetMode(config.App.Mode)
 	r = gin.New()

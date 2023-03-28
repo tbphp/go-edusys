@@ -1,4 +1,4 @@
-package logrus
+package app
 
 import (
 	"github.com/gin-gonic/gin"
@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func ConfigLog() {
+func InitLog() {
 	if gin.IsDebugging() {
 		log.SetLevel(log.DebugLevel)
 		log.SetFormatter(&log.TextFormatter{
