@@ -29,10 +29,10 @@ func Run() {
 }
 
 func loadMiddlewares() {
-	r.Use(
-		ginlogrus.Logger(log.StandardLogger()),
-		gin.CustomRecoveryWithWriter(nil, response.ErrorHandler()),
-	)
+	if !gin.IsDebugging() {
+		r.Use(ginlogrus.Logger(log.StandardLogger()))
+	}
+	r.Use(gin.CustomRecoveryWithWriter(nil, response.ErrorHandler()))
 }
 
 func registerRouters() {

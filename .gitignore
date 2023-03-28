@@ -29,5 +29,6 @@ gen
 # Go workspace file
 go.work
 
-/config/*.ini
-!/config/app.ini
+/config/env.ini
+
+/tmp

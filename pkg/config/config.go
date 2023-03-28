@@ -30,11 +30,7 @@ var Auth struct {
 
 var configFiles = []string{
 	"./config/app.ini",
-	"./config/pro.ini",
-	"./config/uat.ini",
-	"./config/fat.ini",
-	"./config/dev.ini",
-	"./config/local.ini",
+	"./config/env.ini",
 }
 
 func init() {
