@@ -42,11 +42,11 @@ func (t *SchoolApi) Show(c *gin.Context) {
 func (t *SchoolApi) Store(c *gin.Context) {
 	var school model.School
 	if err := c.ShouldBindJSON(&school); err != nil {
-		panic(err)
+		panic(e.ValidationError("参数错误"))
 	}
 
 	tx := t.db.Create(&school)
 	if tx.Error != nil {
-		panic(tx.Error)
+		panic(e.DefaultError("创建失败"))
 	}
 }

@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"fmt"
 	jwt "github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
 	"github.com/tbphp/go-edusys/internal/e"
@@ -74,6 +75,6 @@ func init() {
 	})
 
 	if err != nil {
-		panic("JWT初始化失败")
+		panic(fmt.Sprintf("JWT初始化失败: %v", err))
 	}
 }

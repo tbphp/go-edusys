@@ -21,6 +21,10 @@ func EmptyDataError() *CError {
 	return CodeError(EmptyData)
 }
 
+func ValidationError(msg string) *CError {
+	return NewError(ValidationFailed, msg)
+}
+
 func (e *CError) Error() string {
 	return e.msg
 }

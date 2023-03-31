@@ -14,10 +14,10 @@ import (
 var r *gin.Engine
 
 func init() {
+	gin.SetMode(config.App.Mode)
 	InitLog()
 	Migrate()
 
-	gin.SetMode(config.App.Mode)
 	r = gin.New()
 	loadMiddlewares()
 	registerRouters()
