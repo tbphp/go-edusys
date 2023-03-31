@@ -1,6 +1,7 @@
 package model
 
 import (
+	"database/sql"
 	jwt "github.com/appleboy/gin-jwt/v2"
 	"github.com/tbphp/go-edusys/internal/enum/identity"
 	"github.com/tbphp/go-edusys/internal/request"
@@ -10,8 +11,8 @@ import (
 
 type Teacher struct {
 	AuthUser
-	Name   string `json:"name" gorm:"type:varchar" binding:"required,min=2,max=50"`
-	LineId string `json:"line_id" gorm:"type:varchar(255);unique:unq_line_id"`
+	Name   string         `json:"name" gorm:"type:varchar" binding:"required,min=2,max=50"`
+	LineId sql.NullString `json:"line_id" gorm:"type:varchar(255);unique:unq_line_id"`
 	Times
 }
 
