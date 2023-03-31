@@ -5,24 +5,8 @@ type CError struct {
 	msg  string
 }
 
-func NewError(code int, msg string) *CError {
+func New(code int, msg string) *CError {
 	return &CError{code: code, msg: msg}
-}
-
-func CodeError(code int) *CError {
-	return NewError(code, GetMsg(code))
-}
-
-func DefaultError(msg string) *CError {
-	return NewError(Exception, msg)
-}
-
-func EmptyDataError() *CError {
-	return CodeError(EmptyData)
-}
-
-func ValidationError(msg string) *CError {
-	return NewError(ValidationFailed, msg)
 }
 
 func (e *CError) Error() string {
@@ -32,3 +16,19 @@ func (e *CError) Error() string {
 func (e *CError) Code() int {
 	return e.code
 }
+
+var (
+	Unauthorized = func(message string) *CError {
+		return New(401, message)
+	}
+	Authorization    = New(403, "没有权限")
+	NotFound         = New(404, "路由错误")
+	EmptyData        = New(410, "数据不存在")
+	ValidationFailed = func(msg string) *CError {
+		return New(422, msg)
+	}
+	Exception = func(msg string) *CError {
+		return New(510, msg)
+	}
+	Default = New(510, "业务异常，服务端没有响应。")
+)

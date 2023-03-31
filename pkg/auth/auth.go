@@ -51,7 +51,7 @@ func init() {
 			})
 		},
 		Unauthorized: func(c *gin.Context, code int, message string) {
-			panic(e.NewError(e.Unauthorized, message))
+			panic(e.Unauthorized(message))
 		},
 		IdentityHandler: func(c *gin.Context) any {
 			claims := jwt.ExtractClaims(c)

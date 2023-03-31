@@ -33,7 +33,7 @@ func (t *SchoolApi) Show(c *gin.Context) {
 	var school model.School
 	tx := t.db.First(&school, c.Param("id"))
 	if tx.Error != nil {
-		panic(e.EmptyDataError())
+		panic(e.EmptyData)
 	}
 
 	c.Set(middleware.HandlerResultKey, school)
@@ -42,11 +42,11 @@ func (t *SchoolApi) Show(c *gin.Context) {
 func (t *SchoolApi) Store(c *gin.Context) {
 	var school model.School
 	if err := c.ShouldBindJSON(&school); err != nil {
-		panic(e.ValidationError("参数错误"))
+		panic(e.ValidationFailed("参数错误"))
 	}
 
 	tx := t.db.Create(&school)
 	if tx.Error != nil {
-		panic(e.DefaultError("创建失败"))
+		panic(e.Exception("创建失败"))
 	}
 }

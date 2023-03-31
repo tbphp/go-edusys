@@ -20,13 +20,13 @@ func NewTeacherApi(db *gorm.DB) *TeacherApi {
 func (t *TeacherApi) Register(c *gin.Context) {
 	req := request.RegisterRequest{}
 	if err := c.ShouldBindJSON(&req); err != nil {
-		panic(e.ValidationError("参数错误"))
+		panic(e.ValidationFailed("参数错误"))
 	}
 
 	// 生成密码
 	passwordBytes, err := bcrypt.GenerateFromPassword([]byte(req.Password), bcrypt.DefaultCost)
 	if err != nil {
-		panic(e.DefaultError("密码加密失败"))
+		panic(e.Exception("密码加密失败"))
 	}
 
 	teacher := model.Teacher{
@@ -38,6 +38,6 @@ func (t *TeacherApi) Register(c *gin.Context) {
 	}
 	tx := t.db.Create(&teacher)
 	if tx.Error != nil {
-		panic(e.DefaultError("创建失败"))
+		panic(e.Exception("创建失败"))
 	}
 }

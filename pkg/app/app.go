@@ -48,6 +48,6 @@ func registerRouters() {
 
 func notFound() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		panic(e.CodeError(e.NotFound))
+		panic(e.NotFound)
 	}
 }

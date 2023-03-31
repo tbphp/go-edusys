@@ -9,7 +9,8 @@ import (
 
 func ErrorHandler() gin.RecoveryFunc {
 	return func(c *gin.Context, err any) {
-		result := NewResponse(e.Exception, e.GetMsg(e.Exception), map[string]any{})
+		defaultError := e.Default
+		result := NewResponse(defaultError.Code(), defaultError.Error(), map[string]any{})
 
 		isCe := false
 		switch v := err.(type) {

@@ -2,7 +2,6 @@ package middleware
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/tbphp/go-edusys/internal/e"
 	"github.com/tbphp/go-edusys/pkg/response"
 	"net/http"
 )
@@ -14,7 +13,7 @@ func ResultMiddleware() gin.HandlerFunc {
 		c.Next()
 
 		// 默认返回值
-		result := response.NewResponse(e.Ok, e.GetMsg(e.Ok), map[string]any{})
+		result := response.NewResponse(http.StatusOK, "success", map[string]any{})
 
 		// 解析返回值
 		data, ok := c.Get(HandlerResultKey)
