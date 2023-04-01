@@ -2,8 +2,10 @@ package response
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
 	log "github.com/sirupsen/logrus"
 	"github.com/tbphp/go-edusys/internal/e"
+	validator2 "github.com/tbphp/go-edusys/pkg/validator"
 	"net/http"
 )
 
@@ -18,6 +20,11 @@ func ErrorHandler() gin.RecoveryFunc {
 			result.Code = v.Code()
 			result.Msg = v.Error()
 			isCe = true
+			break
+		case validator.ValidationErrors:
+			isCe = true
+			result.Code = 422
+			result.Msg = v[0].Translate(validator2.Trans)
 			break
 		case error:
 			result.Msg = v.Error()

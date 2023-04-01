@@ -20,7 +20,7 @@ func NewTeacherApi(db *gorm.DB) *TeacherApi {
 func (t *TeacherApi) Register(c *gin.Context) {
 	req := request.RegisterRequest{}
 	if err := c.ShouldBindJSON(&req); err != nil {
-		panic(e.ValidationFailed("参数错误"))
+		panic(err)
 	}
 
 	// 生成密码

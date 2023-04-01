@@ -8,6 +8,7 @@ import (
 	"github.com/tbphp/go-edusys/internal/router"
 	"github.com/tbphp/go-edusys/pkg/config"
 	"github.com/tbphp/go-edusys/pkg/response"
+	"github.com/tbphp/go-edusys/pkg/validator"
 	ginlogrus "github.com/toorop/gin-logrus"
 )
 
@@ -22,6 +23,7 @@ func init() {
 	loadMiddlewares()
 	registerRouters()
 	InitSwagger()
+	validator.InitValidator()
 }
 
 func Run() {
