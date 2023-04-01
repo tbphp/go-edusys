@@ -7,7 +7,7 @@ import (
 
 func registerTeacherRouters(r *gin.RouterGroup) {
 	// 学校接口
-	r.GET("schools", school.Index)
-	r.GET("schools/:id", school.Show)
-	r.POST("schools", school.Store)
+	r.GET("schools", h(school.Index))
+	r.GET("schools/:id", h(school.Show))
+	r.POST("schools", h(school.Store))
 }

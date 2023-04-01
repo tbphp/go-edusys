@@ -1,7 +1,6 @@
 package teacher
 
 import (
-	"github.com/gin-gonic/gin"
 	"github.com/tbphp/go-edusys/internal/e"
 	"github.com/tbphp/go-edusys/internal/model"
 	"github.com/tbphp/go-edusys/pkg/database"
@@ -14,12 +13,7 @@ type registerRequest struct {
 	Password string `json:"password" binding:"required,min=6,max=32" label:"密码"`
 }
 
-func Register(c *gin.Context) {
-	req := registerRequest{}
-	if err := c.ShouldBindJSON(&req); err != nil {
-		panic(err)
-	}
-
+func Register(req registerRequest) {
 	// 生成密码
 	passwordBytes, err := bcrypt.GenerateFromPassword([]byte(req.Password), bcrypt.DefaultCost)
 	if err != nil {
