@@ -1,24 +1,21 @@
-package api
+package teacher
 
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/tbphp/go-edusys/internal/e"
 	"github.com/tbphp/go-edusys/internal/model"
-	"github.com/tbphp/go-edusys/internal/request"
+	"github.com/tbphp/go-edusys/pkg/database"
 	"golang.org/x/crypto/bcrypt"
-	"gorm.io/gorm"
 )
 
-type TeacherApi struct {
-	db *gorm.DB
+type registerRequest struct {
+	Name     string `json:"name" binding:"required,min=2,max=50" label:"姓名"`
+	Username string `json:"username" binding:"required,min=2,max=50,email" label:"用户名"`
+	Password string `json:"password" binding:"required,min=6,max=32" label:"密码"`
 }
 
-func NewTeacherApi(db *gorm.DB) *TeacherApi {
-	return &TeacherApi{db: db}
-}
-
-func (t *TeacherApi) Register(c *gin.Context) {
-	req := request.RegisterRequest{}
+func Register(c *gin.Context) {
+	req := registerRequest{}
 	if err := c.ShouldBindJSON(&req); err != nil {
 		panic(err)
 	}
@@ -36,7 +33,7 @@ func (t *TeacherApi) Register(c *gin.Context) {
 		},
 		Name: req.Name,
 	}
-	tx := t.db.Create(&teacher)
+	tx := database.DB.Create(&teacher)
 	if tx.Error != nil {
 		panic(e.Exception("创建失败"))
 	}

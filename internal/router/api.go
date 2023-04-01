@@ -2,11 +2,10 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/tbphp/go-edusys/internal/api"
+	teacher2 "github.com/tbphp/go-edusys/internal/api/teacher"
 	"github.com/tbphp/go-edusys/internal/enum/identity"
 	"github.com/tbphp/go-edusys/internal/middleware"
 	"github.com/tbphp/go-edusys/pkg/auth"
-	"github.com/tbphp/go-edusys/pkg/database"
 )
 
 func RegisterApiRouters(r *gin.Engine) {
@@ -14,9 +13,8 @@ func RegisterApiRouters(r *gin.Engine) {
 	{
 		g.POST("login", auth.Auth.LoginHandler)
 
-		teacherApi := api.NewTeacherApi(database.DB)
 		// 教师注册
-		g.POST("teacher/register", teacherApi.Register)
+		g.POST("teacher/register", teacher2.Register)
 
 		// 教师
 		teacher := g.Group(
