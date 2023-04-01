@@ -9,6 +9,9 @@ import (
 var Server struct {
 	HttpAddress string `mapstructure:"http_address"`
 	HttpPort    int    `mapstructure:"http_port"`
+	TLS         bool   `mapstructure:"tls"`
+	TLSCertFile string `mapstructure:"tls_cert_file"`
+	TLSKeyFile  string `mapstructure:"tls_key_file"`
 }
 
 var Database struct {

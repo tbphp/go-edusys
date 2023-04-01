@@ -25,11 +25,16 @@ func init() {
 }
 
 func Run() {
-	_ = r.Run(fmt.Sprintf(
+	addr := fmt.Sprintf(
 		"%s:%d",
 		config.Server.HttpAddress,
 		config.Server.HttpPort,
-	))
+	)
+	if config.Server.TLS {
+		_ = r.RunTLS(addr, config.Server.TLSCertFile, config.Server.TLSKeyFile)
+	} else {
+		_ = r.Run(addr)
+	}
 }
 
 func loadMiddlewares() {
