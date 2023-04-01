@@ -1,6 +1,7 @@
 package model
 
 import (
+	"errors"
 	jwt "github.com/appleboy/gin-jwt/v2"
 	"github.com/tbphp/go-edusys/internal/enum/identity"
 	"github.com/tbphp/go-edusys/internal/request"
@@ -29,12 +30,12 @@ func (t *Student) Authenticator(req request.LoginRequest) (JwtUser, error) {
 	t.Username = req.Username
 	tx := database.DB.Where(t).First(t)
 	if tx.Error != nil {
-		return nil, jwt.ErrFailedAuthentication
+		return nil, errors.New("用户名或密码错误")
 	}
 
 	err := bcrypt.CompareHashAndPassword([]byte(t.Password), []byte(req.Password))
 	if err != nil {
-		return nil, jwt.ErrFailedAuthentication
+		return nil, errors.New("用户名或密码错误")
 	}
 
 	return t, nil

@@ -32,7 +32,7 @@ func init() {
 		Authenticator: func(c *gin.Context) (any, error) {
 			var req request.LoginRequest
 			if err := c.ShouldBindJSON(&req); err != nil {
-				return nil, jwt.ErrMissingLoginValues
+				panic(err)
 			}
 
 			var user model.JwtUser
